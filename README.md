@@ -16,7 +16,6 @@ function solutionFn(object) {
 };
 
 // Тест:
-
 const initialObj = {
   a: 'hello',
   b: false,
@@ -25,7 +24,6 @@ const initialObj = {
   e: true,
   f: 65
 };
-
 const resultObj = solutionFn(initialObj);
 console.log(resultObj) 
 ```
@@ -46,8 +44,9 @@ function solutionFn(number) {
   return number;
 }
 
-const initialNumber = 9348
+// Тест:
 
+const initialNumber = 9348
 const number = solutionFn(initialNumber);
 console.log(number)
 ```
