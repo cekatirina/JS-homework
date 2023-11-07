@@ -1,5 +1,34 @@
 # JS-homework
 *Автор: Екатерина Черных*
+
+### Задание 1
+```js
+function customFilter(array, filterFn, inplace = false) {
+    if (inplace) {
+        for (let i = array.length - 1; i >= 0; i--) {
+            if (!filterFn(array[i], i, array)) {
+                array.splice(i, 1);
+            }
+        }
+        return array;
+    } 
+    else {
+        const filteredArray = [];
+        for (let i = 0; i < array.length; i++) {
+            if (filterFn(array[i], i, array)) {
+                filteredArray.push(array[i]);
+            }
+        }
+        return filteredArray;
+    }
+}
+
+// Тест:
+const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+const result = customFilter(words, (word) => word.length > 6);
+console.log(result) 
+```
+
 ### Задание 2
 ```js
 function solutionFn(object) { 
@@ -17,12 +46,11 @@ function solutionFn(object) {
 
 // Тест:
 const initialObj = {
-  a: 'hello',
-  b: false,
-  c: 70,
-  d: {name: 'Igor', course: 'Web Development'},
-  e: true,
-  f: 65
+  a: 'some string 1',
+    b: 42,
+    c: { c1: 'some string 2' },
+    d: [],
+    e: 123,
 };
 const resultObj = solutionFn(initialObj);
 console.log(resultObj) 
@@ -46,11 +74,11 @@ function sum(left_value, right_value) {
 }
 
 // Тест:
-const testSum_num = sum(2, 3)
-const testSum_left = sum('hey', 12)
-const testSum_right = sum(5, 'bye')
-const testSum_both = sum(false, true)
-console.log('testSum_num:', testSum_num, 'testSum_left:', testSum_left, 'testSum_right:', testSum_right, 'testSum_both:', testSum_both)
+const test_nums = sum(7, 20)
+const test_left = sum('a', 1117)
+const test_right = sum(1107, 'b')
+const test_both = sum('c', 'd')
+console.log('test_nums:', test_nums, 'test_left:', test_left, 'test_right:', test_right, 'test_both:', test_both)
 ```
 
 ### Задание 4
@@ -60,25 +88,51 @@ function getMinimalCVS(array) {
   return {
     head: () => array.slice(), 
     history: () => history.slice(), 
-    push: (new_element) => {
-      array.push(new_element); 
+    push: (new_entry) => {
+      array.push(new_entry); 
       history.push(array.slice());
     }, 
     pop: () => {
-      const new_element = array.pop();
+      const new_entry = array.pop();
       history.push(array.slice()); 
-      return new_element 
+      return new_entry 
     }
   };
 }
 
 // Тест:
 const cvs = getMinimalCVS(['a', 'b', 'c']);
-cvs.push('hello');
-cvs.push('world')
+cvs.push('d');
+cvs.push('e')
 console.log(cvs.pop()); 
 console.log(cvs.history());
 console.log(cvs.head())
+```
+
+### Задание 5
+```js
+function globalToggle(className) {
+    const elements = document.querySelectorAll('.' + className);
+    
+    if (elements.length === 0) {
+        return;
+    }
+    
+    const isDefault = !className.endsWith('_active');
+    
+    const newClassName = isDefault ? className + '_active' : 
+        className.replace('_active', '');
+        
+    elements.forEach((element) => {
+        element.classList.remove(className);
+        element.classList.add(newClassName);
+    });
+}
+
+// Тест:
+const className = 'tag';
+const result = globalToggle(className);
+console.log(result) 
 ```
 
 ### Задание 6
@@ -97,7 +151,7 @@ function hitOrRun(a, b) {
 }
 
 // Тест:
-console.log(hitOrRun(8, 15))
+console.log(hitOrRun(7, 20))
 ```
 
 ### Задание 7
@@ -105,56 +159,15 @@ console.log(hitOrRun(8, 15))
 function solutionFn(someString) {  
   let separateWords = someString.split('_'); 
   for (let singleWord = 1; singleWord < separateWords.length; singleWord++) { 
-    separateWords[singleWord] = separateWords[singleWord][0].toUpperCase() + separateWords[singleWord].slice(1).toLowerCase() ; 
+    separateWords[singleWord] = separateWords[singleWord][0].toUpperCase() + separateWords[singleWord].slice(1) ; 
   }
   return separateWords.join(''); 
 }
 
 // Тест:
-const someString = "backend_developer_wrote_this_name"
-const testFunct = solutionFn(someString)
-console.log(testFunct)
-```
-
-### Задание 8
-```js
-function isSpam(text, keywords) { 
-  for (let len = 0; len < keywords.length; len++) {  
-    if (text.toLowerCase().includes(keywords[len].toLowerCase())) { 
-      return true; 
-    }
-  }
-  return false; 
-}
-
-// Тест:
-const nasty_mail = "Поздравляем! Наш алгоритм выбрал вас для доступа к ПРЕМИУМ программе. Это 100% не развод"
-const good_mail = "Привет! Подскажи, пожалуйста, что задано по веб-разработке?"
-const stopwords = ["Алгоритм", "Премиум", "Развод", "Выигрыш"]
-
-const spamTest = isSpam(nasty_mail, stopwords)
-const noSpamTest = isSpam(good_mail, stopwords)
-console.log(spamTest, noSpamTest)
-```
-
-### Задание 9
-```js
-function theWorld(ms) {
-  const end = new Date().getTime() + ms; 
-  const interval = setInterval(() => { 
-    const countDown = end - new Date().getTime(); 
-    if (countDown <= 0) { 
-      clearInterval(interval); 
-      console.log("Время снова в силе!"); 
-    } else { 
-      const remainingSeconds = Math.ceil(countDown / 1000);
-      console.log(`До возобновления: ${remainingSeconds} секунд / секунды / секунда`);
-    }
-  }, 1000);
-}
-
-// Тест:
-theWorld(5000)
+const snakeData = 'data_in_snake_case';
+const result = solutionFn(snakeData);
+console.log(result);
 ```
 
 ### Задание 10
