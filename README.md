@@ -1,7 +1,7 @@
 # JS-homework
 *Автор: Екатерина Черных*
 
-### Задание 1
+### 1. Custom Array.prototype.filter
 ```js
 function customFilter(array, filterFn, inplace = false) {
     if (inplace) {
@@ -29,7 +29,7 @@ const result = customFilter(words, (word) => word.length > 6);
 console.log(result) 
 ```
 
-### Задание 2
+### 2. Ключи и свойства
 ```js
 function solutionFn(object) { 
   const resultObj = {}; 
@@ -56,20 +56,20 @@ const resultObj = solutionFn(initialObj);
 console.log(resultObj) 
 ```
 
-### Задание 3
+### 3. Больше никаких шуток про 1 + '1' === '11'
 ```js
-function sum(left_value, right_value) { 
-    if ((typeof left_value !== 'number') && (typeof right_value !== 'number')) { 
+function sum(left, right) { 
+    if ((typeof left !== 'number') && (typeof right !== 'number')) { 
       return 'Operands are not numbers';
     }
-    else if (typeof left_value !== 'number') { 
+    else if (typeof left !== 'number') { 
       return 'The left operand is not number'; 
     }
-    else if (typeof right_value !== 'number') { 
+    else if (typeof right !== 'number') { 
       return 'The right operand is not number';
     }
     else {
-      return left_value + right_value; //
+      return left + right; //
     }    
 }
 
@@ -81,7 +81,7 @@ const test_both = sum('c', 'd')
 console.log('test_nums:', test_nums, 'test_left:', test_left, 'test_right:', test_right, 'test_both:', test_both)
 ```
 
-### Задание 4
+### 4. CVS на минималках
 ```js
 function getMinimalCVS(array) {
   const history = [array.slice()] 
@@ -109,7 +109,7 @@ console.log(cvs.history());
 console.log(cvs.head())
 ```
 
-### Задание 5
+### 5. Глобальный переключатель
 ```js
 function globalToggle(className) {
     const elements = document.querySelectorAll('.' + className);
@@ -135,7 +135,7 @@ const result = globalToggle(className);
 console.log(result) 
 ```
 
-### Задание 6
+### 6. Hit Or Run
 ```js
 function hitOrRun(a, b) {
   let randomNumber = Math.floor(Math.random() * (b - a + 1)) + a; 
@@ -154,7 +154,7 @@ function hitOrRun(a, b) {
 console.log(hitOrRun(7, 20))
 ```
 
-### Задание 7
+### 7. Case Converter
 ```js
 function solutionFn(someString) {  
   let separateWords = someString.split('_'); 
@@ -170,7 +170,7 @@ const result = solutionFn(snakeData);
 console.log(result);
 ```
 
-### Задание 10
+### 10. Задача с собеседования
 ```js
 function solutionFn(number) {
   while (number >= 10) {
