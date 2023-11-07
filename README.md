@@ -130,9 +130,7 @@ function globalToggle(className) {
 }
 
 // Тест:
-const className = 'tag';
-const result = globalToggle(className);
-console.log(result) 
+ 
 ```
 
 ### 6. Hit Or Run
